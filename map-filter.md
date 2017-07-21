@@ -28,15 +28,15 @@ Simple enough. Let’s abstract this loop into its own function so that we can t
 
     var originalArr = [1, 2, 3, 4, 5];
 
-    **function multiplyByThree(arr) {
-    **    var newArr = [];
+    function multiplyByThree(arr) {
+        var newArr = [];
         
         for(var i = 0; i < arr.length; i++) {
             newArr[i] = arr[i] * 3;
         }
 
-    **    return newArr;
-    }**
+        return newArr;
+    }
 
     **var arrTransformed = multiplyByThree(originalArr);
     **console.log(arrTransformed); // -> [3, 6, 9, 12, 15]
@@ -45,9 +45,9 @@ Beautiful. Now we can pass any array into multiplyByThree and get a new array ou
 
     var originalArr = [1, 2, 3, 4, 5];
 
-    **function timesThree(item) {
+    function timesThree(item) {
         return item * 3;
-    }**
+    }
 
     function multiplyByThree(arr) {
         var newArr = [];
@@ -102,15 +102,15 @@ We’ve renamed the function and given it an extra argument to take in. That arg
         return item * 3;
     }
 
-    var arrTimesThree = **multiply**(originalArr, **timesThree**);
+    var arrTimesThree = multiply(originalArr, timesThree);
     console.log(arrTimesThree); // -> [3, 6, 9, 12, 15]
 
 We’re giving our multiply function the instructions it needs to transform each value in the array by passing in the timesThree function. What if we want to **multiply by 5** instead? We just give it different instructions, or a different function.
 
     var originalArr = [1, 2, 3, 4, 5];
 
-    function **timesFive**(item) {
-        return item * **5**;
+    function timesFive(item) {
+        return item * 5;
     }
 
     var arrTimesFive = multiply(originalArr, **timesFive**);
@@ -134,11 +134,11 @@ Let’s make multiply even more powerful. Instead of multiplying by something, l
 
 Into this.
 
-    function **map**(arr, **transform**) {
+    function map(arr, transform) {
         var newArr = [];
         
         for(var i = 0; i < arr.length; i++) {
-            newArr[i] = **transform**(arr[i]);
+            newArr[i] = transform(arr[i]);
         }
 
         return newArr;
@@ -168,7 +168,7 @@ How does the map function compare to the actual native Array.map? The usage is s
     }
 
     var arr = [1, 2, 3];
-    var newArr = **map(arr, **func**);**
+    var newArr = map(arr, func);
 
     console.log(newArr); // -> [3, 6, 9]
 
@@ -179,7 +179,7 @@ Using the native Array.map, we don’t pass in the array. We *call* the Array.ma
     }
 
     var arr = [1, 2, 3];
-    var newArr = **arr.map(**func**);**
+    var newArr = arr.map(func);
 
     console.log(newArr); // -> [3, 6, 9]
 
@@ -193,8 +193,8 @@ There’s a key difference we’ve skipped over. Array.map will provide your giv
         console.log(item);
     }
 
-    function logAll(item, **index, arr**) {
-        console.log(item, **index, arr**);
+    function logAll(item, index, arr) {
+        console.log(item, index, arr);
     }
 
     var arr = ['abc', 'def', 'ghi'];
@@ -207,8 +207,8 @@ There’s a key difference we’ve skipped over. Array.map will provide your giv
 
 This allows you to use the index and the original array inside your transformation function if you choose. For example, say we want to turn an array of items into a numbered shopping list. We’d want to use the index:
 
-    function multiplyByIndex(item, **index**) {
-        return (**index** + 1) + '. ' + item;
+    function multiplyByIndex(item, index) {
+        return (index + 1) + '. ' + item;
     }
 
     var arr = ['bananas', 'tomatoes', 'pasta', 'protein shakes'];
@@ -223,7 +223,7 @@ Our complete map function should incorporate this functionality.
         var newArr = [];
         
         for(var i = 0; i < arr.length; i++) {
-            newArr[i] = transform(arr[i]**, i, arr**);
+            newArr[i] = transform(arr[i], i, arr);
         }
 
         return newArr;
@@ -262,8 +262,8 @@ The idea here is similar to Array.map, except instead of transforming individual
 
 Let’s abstract this to a function so we can remove values below 5 in any array.
 
-    **function filterLessThanFive(arr) {
-    **    var filteredArr = [];
+    function filterLessThanFive(arr) {
+        var filteredArr = [];
 
         for(var i = 0; i < arr.length; i++) {
             if(arr[i] >= 5){
@@ -271,25 +271,25 @@ Let’s abstract this to a function so we can remove values below 5 in any array
             }
         }
 
-    **    return filteredArr;
-    }**
+        return filteredArr;
+    }
 
     var arr1 = [2, 4, 6, 8, 10];
-    **var arr1Filtered = filterLessThanFive(arr1);**
+    var arr1Filtered = filterLessThanFive(arr1);
 
     console.log(arr1Filtered); // -> [6, 8, 10]
 
 Let’s make it so we can filter out all values below any arbitrary value.
 
-    **function isGreaterThan5(item) {
+    function isGreaterThan5(item) {
         return item > 5;
-    }**
+    }
 
     function filterLessThanFive(arr) {
         var filteredArr = [];
 
         for(var i = 0; i < arr.length; i++) {
-            if(**isGreaterThan5**(arr[i])) {
+            if(isGreaterThan5(arr[i])) {
                 filteredArr.push(arr[i]);
             }
         }
@@ -304,11 +304,11 @@ Let’s make it so we can filter out all values below any arbitrary value.
 
 → Abstracting out the filtering functionality
 
-    function **filterBelow**(arr, **greaterThan**) {
+    function filterBelow(arr, greaterThan) {
         var filteredArr = [];
 
         for(var i = 0; i < arr.length; i++) {
-            if(**greaterThan**(arr[i])) {
+            if(greaterThan(arr[i])) {
                 filteredArr.push(arr[i]);
             }
         }
@@ -324,19 +324,19 @@ Let’s make it so we can filter out all values below any arbitrary value.
         return item > 5;
     }
 
-    var newArr = filterBelow(originalArr, **isGreaterThan5**);
+    var newArr = filterBelow(originalArr, isGreaterThan5);
 
     console.log(newArr); // -> [6, 8, 10];
 
 → Filtering out anything below 7, using filterBelow
 
-    function **isGreaterThan7**(item) {
-        return item > **7**;
+    function isGreaterThan7(item) {
+        return item > 7;
     }
 
     var newArr2 = filterBelow(originalArr, **isGreaterThan7**);
 
-    console.log(newArr2); // -> **[8, 10];**
+    console.log(newArr2); // -> [8, 10];
 
 ### filter
 
@@ -356,11 +356,11 @@ So we have a function filterBelow that will filter out anything below a certain 
 
 Let’s rename it.
 
-    function **filter**(arr, **testFunction**) {
+    function filter(arr, testFunction) {
         var filteredArr = [];
 
         for(var i = 0; i < arr.length; i++) {
-            if(**testFunction**(arr[i])) {
+            if(testFunction(arr[i])) {
                 filteredArr.push(arr[i]);
             }
         }
@@ -376,16 +376,16 @@ And we’ve written filter. It’s basically the same as Array.filter, again exc
         return str.length > 3;
     }
 
-    var newArr1 = **filter(arr,** longerThanThree);
-    var newArr2 = **arr.filter(**longerThanThree);
+    var newArr1 = filter(arr, longerThanThree);
+    var newArr2 = arr.filter(longerThanThree);
 
     console.log(newArr1); // -> ['ghijkl', 'mnopuv']
     console.log(newArr2); // -> ['ghijkl', 'mnopuv']
 
 Again, Array.filter passes in the index and the original array to your function.
 
-    function func(item, **index, arr**) {
-        console.log(item, **index, arr**);
+    function func(item, index, arr) {
+        console.log(item, index, arr);
     }
 
     var arr = ['abc', 'def', 'ghi'];
@@ -400,7 +400,7 @@ So we should make our function do the same.
         var filteredArr = [];
 
         for(var i = 0; i < arr.length; i++) {
-            if(testFunction(arr[i]**, i, arr**)) {
+            if(testFunction(arr[i], i, arr)) {
                 filteredArr.push(arr[i]);
             }
         }
