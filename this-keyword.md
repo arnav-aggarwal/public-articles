@@ -9,7 +9,7 @@ Determining what this is is actually rather simple. The overarching rule is that
 
 ## Rules
 
-1. If the new keyword is used when calling the function, this inside the function is a brand new object.
+1 - If the new keyword is used when calling the function, this inside the function is a brand new object.
 
     function ConstructorExample() {
         console.log(this);
@@ -23,10 +23,9 @@ Determining what this is is actually rather simple. The overarching rule is that
     // -> { value: 10 }
 
 For more information about new, feel free to read my article.
-[**Javascript’s “new” Keyword Explained as Simply as Possible**
-*Normal Function Call*codeburst.io](https://codeburst.io/javascripts-new-keyword-explained-as-simply-as-possible-fec0d87b2741)
+[Javascript’s “new” Keyword Explained as Simply as Possible](https://codeburst.io/javascripts-new-keyword-explained-as-simply-as-possible-fec0d87b2741)
 
-2. If [apply](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply), [call](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call), or [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) are used to call a function, this inside the function is the object that is passed in as the argument.
+2 - If [apply](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply), [call](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call), or [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) are used to call a function, this inside the function is the object that is passed in as the argument.
 
     function fn() {
         console.log(this);
@@ -42,7 +41,7 @@ For more information about new, feel free to read my article.
     fn.call(obj);  // -> { value: 5 }
     fn.apply(obj); // -> { value: 5 }
 
-3. If a function is called as a method — that is, if dot notation is used to invoke the function — this is the object that the function is a property of. In other words, when a dot is to the left of a function invocation, this is the object to the left of the dot. (ƒ symbolizes function in the code blocks)
+3 - If a function is called as a method — that is, if dot notation is used to invoke the function — this is the object that the function is a property of. In other words, when a dot is to the left of a function invocation, this is the object to the left of the dot. (ƒ symbolizes function in the code blocks)
 
     var obj = {
         value: 5,
@@ -53,7 +52,7 @@ For more information about new, feel free to read my article.
 
     obj.printThis(); // -> { value: 5, printThis: ƒ }
 
-4. If a function is invoked as a *free function invocation*, meaning it was invoked without any of the conditions present above, this is the global object. In a browser, it’s window.
+4 - If a function is invoked as a *free function invocation*, meaning it was invoked without any of the conditions present above, this is the global object. In a browser, it’s window.
 
     function fn() {
         console.log(this);
@@ -67,9 +66,9 @@ For more information about new, feel free to read my article.
 
     console.log(fn === window.fn); // -> true
 
-5. If multiple of the above rules apply, the rule that is higher wins and will set the this value.
+5 - If multiple of the above rules apply, the rule that is higher wins and will set the this value.
 
-6. If the function is an ES2015 arrow function, it ignores all the rules above and receives the this value of its surrounding scope **at the time it’s created**. To determine this, go one line above the arrow function’s creation and see what the value of this is there. It will be the same in the arrow function.
+6 - If the function is an ES2015 arrow function, it ignores all the rules above and receives the this value of its surrounding scope **at the time it’s created**. To determine this, go one line above the arrow function’s creation and see what the value of this is there. It will be the same in the arrow function.
 
 ![](https://cdn-images-1.medium.com/max/5056/1*cA1_BR0-E4OCKYLOhKTchQ.png)
 
@@ -132,11 +131,11 @@ If rules 1 and 3 both apply, rule 1 takes precendence.
 Libraries will sometimes intentionally bind the value of this inside their functions. this is bound to the most useful value for use in the function. jQuery, for example, binds this to the DOM element triggering an event in the callback to that event. If a library has an unexpected this value that doesn’t seem to follow the rules, check its documentation. It’s likely being bound using bind.
 
 ### If this (no pun intended) was helpful, please hit the ❤ and feel free to subscribe and check out some of my other recent publications.
-[**Javascript’s “new” Keyword Explained as Simply as Possible**
-*Normal Function Call*medium.com](https://medium.com/@arnav_aggarwal/javascripts-new-keyword-explained-as-simply-as-possible-fec0d87b2741)
-[**Master Map & Filter, Javascript’s Most Powerful Array Functions**
-*Learn how Array.map and Array.filter work by writing them yourself.*medium.com](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
-[**Master Javascript’s New, Cutting-Edge Object Spread Operator**
-*I recently read a great explanation of the spread operator applied to arrays. With Node v8.0.0 introducing object rest…*medium.com](https://medium.com/@arnav_aggarwal/master-javascripts-object-spread-operator-3803430e99aa)
+
+[Javascript’s “new” Keyword Explained as Simply as Possible](https://medium.com/@arnav_aggarwal/javascripts-new-keyword-explained-as-simply-as-possible-fec0d87b2741)
+
+[Master Map & Filter, Javascript’s Most Powerful Array Functions](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
+
+[Master Javascript’s New, Cutting-Edge Object Spread Operator](https://medium.com/@arnav_aggarwal/master-javascripts-object-spread-operator-3803430e99aa)
 
 ### That’s it. Go write some code.

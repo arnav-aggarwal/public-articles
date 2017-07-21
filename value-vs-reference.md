@@ -265,10 +265,11 @@ The only difference is that when we use the function, person is no longer in sco
 
 ### That’s it. Go write some code.
 
-— — — — — — — — — — — — — — — — — — — — — — — — — — — — — —
 
 ### If this article helped, please hit the heart on the left and feel free to subscribe and check out my other recent publications.
-[**The Simple Rules to ‘this’ in Javascript](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3)**
-[**Learn how Array.map & Array.filter work by writing them yourself](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)**
-[**React Ecosystem Setup — Step-By-Step Walkthrough**
-*Understand what React, Webpack, and Babel are doing and how to configure them yourself](https://codeburst.io/react-ecosystem-setup-step-by-step-walkthrough-721ff45a7fc1)*
+
+[The Simple Rules to ‘this’ in Javascript](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3)
+
+[Learn how Array.map & Array.filter work by writing them yourself](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
+
+[React Ecosystem Setup — Step-By-Step Walkthrough](https://codeburst.io/react-ecosystem-setup-step-by-step-walkthrough-721ff45a7fc1)*
