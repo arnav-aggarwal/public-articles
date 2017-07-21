@@ -10,8 +10,7 @@ React is arguably the hottest framework currently used by the web development co
 **This article is meant to take you through the setup process while teaching you as much as possible about what you and the tools you’re using are doing.** The technologies we’ll discuss are what the React community has decided to embrace in the front-end ecosystem and what you’ll see professional developers and industry leaders using. It’s also what you’ll see in most examples online. There’s a whole ton of more tools and configuration purposely left out as this is meant to be a bare-bones beginners’ guide.
 
 To see what we’ll be working towards or if you just want a boilerplate, go to:
-[**arnav-aggarwal/react-setup-tutorial**
-*Contribute to react-setup-tutorial development by creating an account on GitHub.*github.com](https://github.com/arnav-aggarwal/react-setup-tutorial)
+[arnav-aggarwal/react-setup-tutorial](https://github.com/arnav-aggarwal/react-setup-tutorial)
 
 This article requires elementary proficiency with HTML, Javascript (including very basic ES6 syntax), CSS, Node, and preferably Express. **If you can make a to-do app, you’re ready for this.** Let’s get started.
 
@@ -19,11 +18,11 @@ I’m using npm v 5 and Node v 8. If you’re using an older version of Node you
 
 ## Initial Configuration
 
-Let’s set up a very basic file system. Run npm init and get a package.json. In our project’s root directory, let’s create a file called server.js and a folder called **dist**. **dist** is where we will store all client-facing code. In **dist**, create an app.html file. Make sure your file structure looks like this. Files are in normal font and folders are bold.
+Let’s set up a very basic file system. Run npm init and get a package.json. In our project’s root directory, let’s create a file called server.js and a folder called **dist**. **dist** is where we will store all client-facing code. In **dist**, create an app.html file. Make sure your file structure looks like this.
 
-    **project_root**
+    project_root
     |
-    |---**dist**
+    |---dist
     |    |
     |    |---app.html
     |
@@ -103,13 +102,13 @@ With webpack, src/index.js will be our starting point, or entry point. Webpack w
 
 Webpack requires a configuration file called webpack.config.js. Let’s create this file in our root directory. Excluding node_modules, our file structure now looks like this.
 
-    **project_root**
+    project_root
     |
-    |---**dist**
+    |---dist
     |    |
     |    |---app.html
     |
-    |---**src**
+    |---src
     |    |
     |    |---index.js
     |
@@ -159,8 +158,8 @@ Eventually, we’re going to want to run the code in this file to render our app
     <body>
         <div id="container">React</div>
     </body>
-    **<script src="app.bundle.js"></script>
-    **</html>
+    <script src="app.bundle.js"></script>
+    </html>
 
 If you open up dist/app.html in the browser, you’ll now see the ‘Testing our bundle’ statement log to the browser’s console.
 
@@ -210,15 +209,15 @@ Go ahead and install these three dependencies.
 
 There are a number of ways to configure webpack with babel and we’ll just pick an easy one. You’ll need to add some code into webpack.config.js.
 
-    *const* path = require('path');
+    const path = require('path');
 
-    *module*.*exports* = {
+    module.exports = {
         entry: path.resolve(__dirname, './src/index.js'),
         output: {
             path: path.resolve(__dirname, './dist'),
             filename: 'app.bundle.js',
-        }**,**
-     **   module: {
+        },
+        module: {
             rules: [
                 {
                     test: /\.js$/,
@@ -231,7 +230,7 @@ There are a number of ways to configure webpack with babel and we’ll just pick
                     }
                 }
             ]
-        }**
+        }
     };
 
 This code is telling webpack to test the files in our directory and look for the filenames matching the regex in the test property. /\.js$/ is looking for files ending with .js, so it’ll find all of our Javascript files. We’re telling it to exclude our node_modules folder, because we don’t want to transpile that down, as all of our dependencies should already be written in ES5. Lastly, we’re telling it we want to use babel-loader, which links the babel-core library to webpack. We want to use the env preset, which works with ES2015, 2016, and 2017 code, so we can use the newest features.
@@ -249,15 +248,15 @@ Let’s configure React. Run the following two commands. We’ll need react, rea
 
 We’ll have to add a term to our webpack.config.js file to tell it that we’re writing React code.
 
-    *const* path = require('path');
+    const path = require('path');
 
-    *module*.*exports* = {
+    module.exports = {
         entry: path.resolve(__dirname, './src/index.js'),
         output: {
             path: path.resolve(__dirname, './dist'),
             filename: 'app.bundle.js',
         },
-     **  ** module: {
+        module: {
             rules: [
                 {
                     test: /\.js$/,
@@ -265,7 +264,7 @@ We’ll have to add a term to our webpack.config.js file to tell it that we’re
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [**'react',** 'env']
+                            presets: ['react', 'env']
                         }
                     }
                 }
@@ -390,16 +389,16 @@ First, let’s go ahead and delete ‘React’ from inside our container div in 
 
 Let’s make it so src/index.js contains logic that only deals with rendering our app to the page. We want to abstract all the JSX into separate files. Let’s create a **components** folder in **src**. In there, let’s create a file called app.js that will contain the logic dealing with creating our site. All src/index.js should do is render our app to the DOM.
 
-    **project_root**
+    project_root
     |
-    |---**dist**
+    |---dist
     |    |
     |    |---app.html
     |
-    |---**src**
+    |---src
     |    |
     |    |
-    |    |---**components**
+    |    |---components
     |    |    |
     |    |    |---app.js
     |    |
@@ -416,20 +415,20 @@ Let’s start by changing src/index.js a little bit. First, let’s grow our div
     import ReactDOM from 'react-dom';
 
     const container = document.getElementById('container');
-    const **app** = **(
+    const app = (
         <div>
             <h1>JSX</h1>
             <span>My first JSX span!</span>
         </div>
-    );**
+    );
 
-    ReactDOM.render(**app**, container);
+    ReactDOM.render(app, container);
 
 We’re now going to move the app variable into a separate file. Export it from src/components/app.js. src/index.js should now look like this:
 
     import React from 'react';
     import ReactDOM from 'react-dom';
-    **import App from './components/app';**
+    import App from './components/app';
 
     const container = document.getElementById('container');
 
@@ -456,14 +455,14 @@ We’re going to turn app into a function that *returns* the JSX we want. We’l
 
     import React from 'react';
 
-    export default ***function* app() {
-        return **(
+    export default function app() {
+        return (
             <div>
                 <h1>JSX</h1>
                 <span>My first JSX span!</span>
             </div>
         );
-    **}**
+    }
 
 Change src/index.js into this.
 
@@ -473,7 +472,7 @@ Change src/index.js into this.
 
     const container = document.getElementById('container');
 
-    ReactDOM.render(**<App></App>**, container);
+    ReactDOM.render(<App></App>, container);
 
 When we import a function that returns JSX, we can use that function as a new element, just like we use what we’re already familiar with. We’ve essentially defined a new element. We treat it like we would a div, span, h1-h6, etc, with an opening and closing tag. **Using those opening and closing tags invokes the corresponding function and inserts the returned element in their place.**
 
@@ -504,7 +503,7 @@ We also need to update webpack.config.js to tell it to import and transform our 
             path: path.resolve(__dirname, './dist'),
             filename: 'app.bundle.js',
         },
-     **  ** module: {
+        module: {
             rules: [
                 {
                     test: /\.js$/,
@@ -512,39 +511,39 @@ We also need to update webpack.config.js to tell it to import and transform our 
                     use: {
                         loader: 'babel-loader',
                         options: {
-                            presets: [**'**react**',** 'env']
+                            presets: ['react', 'env']
                         }
                     }
-                }**,
+                },
                 {
                     test: /\.css$/,
                     use: [
                         'style-loader',
                         'css-loader'
                     ]
-                }**
+                }
             ]
         }
     };
 
 It’s fairly common practice to create a separate CSS file for each component, with only the CSS needed for that component present in that file. In **src**, add a **styles** folder. We’ll create src/styles/index.css and add our main CSS to that file. Let’s also create src/styles/app.css to store CSS specific to that component.
 
-    **project_root**
+    project_root
     |
-    |---**dist**
+    |---dist
     |    |
     |    |---app.html
     |
-    |---**src**
+    |---src
     |    |
     |    |---index.js
     |    |
-    |    |---**components
-    **|    |     |
+    |    |---components
+    |    |     |
     |    |     |---app.js
     |    |
-    |    |---**styles
-    **|          |
+    |    |---styles
+    |          |
     |          |---app.css
     |          |---index.css
     |
@@ -570,22 +569,21 @@ With our webpack setup, we can import stylesheets directly. Add this directly be
 
     ...
     import App from './components/app';
-    **import './styles/index.css';
-    **...
+    import './styles/index.css';
+    ...
 
 And similarly, under the import statement in src/components/app.js:
 
     import React from 'react';
-    **import '../styles/app.css';
-    **...
+    import '../styles/app.css';
+    ...
 
 With webpack running, if we refresh our web page we should see the styled changes.
 
 ![](https://cdn-images-1.medium.com/max/2968/1*qqe5bSnMrlmsniIIhgThAQ.png)
 
 The final changes are [here](https://github.com/arnav-aggarwal/react-setup-tutorial/commit/2133261712bfb051877647a1cfc7cc14b78b4b4e). The complete repository is at:
-[**arnav-aggarwal/react-setup-tutorial**
-*Contribute to react-setup-tutorial development by creating an account on GitHub.*github.com](https://github.com/arnav-aggarwal/react-setup-tutorial)
+[arnav-aggarwal/react-setup-tutorial](https://github.com/arnav-aggarwal/react-setup-tutorial)
 
 ### Phew. That’s it.
 
@@ -594,11 +592,11 @@ The final changes are [here](https://github.com/arnav-aggarwal/react-setup-tutor
 Now you can focus on actually learning React. You should now understand enough of webpack to be able to change the configuration yourself in the future if need be. There are a ton of extra tools we can add — CSS preprocessors, testing frameworks, linters, other libraries such as redux and react-router. If interested, see [my more thorough React boilerplate repository](https://github.com/arnav-aggarwal/react-boilerplate-setup). But this will get you started.
 
 ### If this was useful, please hit the heart and feel free to check out my other articles.
-[**Arnav Aggarwal - Medium**
-medium.com](https://medium.com/@arnav_aggarwal)
-[**Master Javascript’s New, Cutting-Edge Object Spread Operator**
-medium.com](https://medium.com/@arnav_aggarwal/master-javascripts-object-spread-operator-3803430e99aa)
-[**The Simple Rules to ‘this’ in Javascript**
-codeburst.io](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3)
+
+[Arnav Aggarwal - Medium](https://medium.com/@arnav_aggarwal)
+
+[Master Javascript’s New, Cutting-Edge Object Spread Operator](https://medium.com/@arnav_aggarwal/master-javascripts-object-spread-operator-3803430e99aa)
+
+[The Simple Rules to ‘this’ in Javascript](https://codeburst.io/the-simple-rules-to-this-in-javascript-35d97f31bde3)
 
 ### That’s it. Go learn React.
