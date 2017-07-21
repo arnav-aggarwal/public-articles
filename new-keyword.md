@@ -56,8 +56,8 @@ The new keyword invokes a function in a special way. It adds some implicit code 
         this.name = name;
         this.age = age;
 
-        // return this;**
-    **}
+        // return this;
+    }
 
 Let’s break it down. new:
 
@@ -94,7 +94,7 @@ If you aren’t familiar with constructors or prototypes, don’t worry about it
 
 What happens if we invoke a normal function like personFn using new? Nothing special. The same rules apply. in the case of personFn, we see nothing explicitly happening.
 
-    var alex = **new** personFn('Alex', 30);
+    var alex = new personFn('Alex', 30);
     // -> { name: 'Alex', age: 30 }
 
 Why? Let’s add our implicit code in to personFn.
@@ -121,7 +121,7 @@ Why? Let’s add our implicit code in to personFn.
         
         return personObj;
         
-      **  // **return this;
+        // return this;
     }
 
 The implicit code is still added in:
@@ -135,11 +135,12 @@ The implicit code is still added in:
 This doesn’t affect our code, since we don’t use the this keyword in our code. We also explicitly return an object, personObj, so the returning logic and the return this line have no use. Effectively, using new to invoke our function here has no effect on the output. If we were using this or if we weren’t returning an object, the function would have different effects when invoked with and without new.
 
 If this was useful, please hit the heart and feel free to subscribe and read my other articles.
-[**In Depth Guide to Map & Filter**
-*Learn how Array.map and Array.filter work by writing them yourself.*medium.com](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
-[**Master || and && Logical Operators**
-*Learn how || and && work to help you write simpler, powerful code.*codeburst.io](https://codeburst.io/javascript-and-logical-operators-89b2ac3409f8)
-[**Javascript’s New, Cutting-Edge Object Spread Operator**
-*I recently read a great explanation of the spread operator applied to arrays. With Node v8.0.0 introducing object rest…*medium.com](https://medium.com/@arnav_aggarwal/master-javascripts-object-spread-operator-3803430e99aa)
+
+[Learn how Array.map and Array.filter work by writing them yourself.](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
+
+[Master || and && Logical Operators](https://codeburst.io/javascript-and-logical-operators-89b2ac3409f8)
+
+[Learn how || and && work to help you write simpler, powerful code.](https://codeburst.io/javascript-and-logical-operators-89b2ac3409f8)
+
 
 ### That’s it. Go write some code.
