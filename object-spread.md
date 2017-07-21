@@ -14,7 +14,7 @@ Many of the use cases discussed here are taken from [http://2ality.com/2016/10/r
 The spread operator will spread all enumerable, own properties of one object to another object.
 
     const obj1 = { c: 3, d: 4 };
-    const obj2 = { a: 1, b: 2, **...obj1** };
+    const obj2 = { a: 1, b: 2, ...obj1 };
 
     console.log(obj2); // -> { a: 1, b: 2, c: 3, d: 4 }
 
@@ -37,17 +37,17 @@ Another use case is **merging objects** together.
 
 When duplicate properties clash, the order determines the outcome. The property put in last wins. If we spread the object last:
 
-    const obj1 = { a: 'abc', **b: 'def'** };
+    const obj1 = { a: 'abc', b: 'def' };
     const obj2 = { b: 123, c: 456, ...obj1};
 
-    console.log(obj2); // -> { a: 'abc', **b: 'def'**, c: 456 }
+    console.log(obj2); // -> { a: 'abc', b: 'def', c: 456 }
 
 If we spread the object first:
 
     const obj1 = { a: 'abc', b: 'def' };
-    const obj2 = { ...obj1, **b: 123**, c: 456 };
+    const obj2 = { ...obj1, b: 123, c: 456 };
 
-    console.log(obj2); // -> { a: 'abc',** b: 123**, c: 456 }
+    console.log(obj2); // -> { a: 'abc', b: 123, c: 456 }
 
 ### Default property assignment
 
@@ -93,7 +93,7 @@ With the rest operator, we add some functionality to object destructuring. Let�
         d: 'jkl'
     };
 
-    const { a, b, **...remainingProperties** } = obj1;
+    const { a, b, ...remainingProperties } = obj1;
 
     console.log(a, b); // -> 'abc', 'def'
     console.log(remainingProperties); // -> { c: 'ghi', d: 'jkl' }
@@ -115,9 +115,11 @@ If present, the spread operator will use the getter of the source object to retr
 A read-only property present higher on the prototype chain will be overridden by the spread operator.
 
 If you liked this, please hit the heart and feel free to share. You can also read my other recent articles.
-[**Master Javascript’s || and && Logical Operators**
-*Learn how || and && work to help you write simpler, powerful code.*codeburst.io](https://codeburst.io/javascript-and-logical-operators-89b2ac3409f8)
-[**Master Map & Filter, Javascript’s Most Powerful Array Functions**
-*Learn how Array.map and Array.filter work by writing them yourself.*medium.com](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
+
+[Learn how || and && work to help you write simpler, powerful code.](https://codeburst.io/javascript-and-logical-operators-89b2ac3409f8)
+
+[Master Map & Filter, Javascript’s Most Powerful Array Functions.](https://codeburst.io/array-functions-map-filter-18a6e5f75da1)
+
+[Learn how Array.map and Array.filter work by writing them yourself.](https://medium.com/@arnav_aggarwal/array-functions-map-filter-18a6e5f75da1)
 
 Thanks for reading.
