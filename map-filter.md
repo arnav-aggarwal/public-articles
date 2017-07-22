@@ -38,8 +38,8 @@ Simple enough. Let’s abstract this loop into its own function so that we can t
         return newArr;
     }
 
-    **var arrTransformed = multiplyByThree(originalArr);
-    **console.log(arrTransformed); // -> [3, 6, 9, 12, 15]
+    var arrTransformed = multiplyByThree(originalArr);
+    console.log(arrTransformed); // -> [3, 6, 9, 12, 15]
 
 Beautiful. Now we can pass any array into multiplyByThree and get a new array out with its values multiplied. Now, we’re going to add some code that might seem useless, but bear with me here. Let’s take a single line in that function — newArr[i] = thisItem * 3 — and turn it into its own function as well. The result will be code that is equivalent to that in the block above, but we’ll need it this way right after.
 
@@ -53,7 +53,7 @@ Beautiful. Now we can pass any array into multiplyByThree and get a new array ou
         var newArr = [];
         
         for(var i = 0; i < arr.length; i++) {
-            newArr[i] = **timesThree**(arr[i]);
+            newArr[i] = timesThree(arr[i]);
         }
 
         return newArr;
@@ -84,11 +84,11 @@ We’re turning this:
 
 Into this.
 
-    function **multiply**(arr, **multiplyFunction**) {
+    function multiply(arr, multiplyFunction) {
         var newArr = [];
         
         for(var i = 0; i < arr.length; i++) {
-            newArr[i] = **multiplyFunction**(arr[i]);
+            newArr[i] = multiplyFunction(arr[i]);
         }
 
         return newArr;
@@ -113,7 +113,7 @@ We’re giving our multiply function the instructions it needs to transform each
         return item * 5;
     }
 
-    var arrTimesFive = multiply(originalArr, **timesFive**);
+    var arrTimesFive = multiply(originalArr, timesFive);
     console.log(arrTimesFive); // -> [5, 10, 15, 20, 25]
 
 It’s as simple as swapping out the timesThree function for a timesFive function. Repeating this technique, we can multiply by any number we want — we just write a new, very simple function. We’ve written one single for-loop and can multiply an array by whatever we want.
